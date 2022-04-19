@@ -1,10 +1,8 @@
 import logging
-import meter_pb2
 import meter_pb2_grpc
 import grpc
-from concurrent import futures
+import asyncio
 import meter_resources
-
 
 
 class ShowMeterServicer(meter_pb2_grpc.ShowMeterServicer):
@@ -17,8 +15,8 @@ class ShowMeterServicer(meter_pb2_grpc.ShowMeterServicer):
             yield meter_usage
 
 
-def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+async def serve():
+    server = grpc.aio.server()
     meter_pb2_grpc.add_ShowMeterServicer_to_server(
         ShowMeterServicer(), server
     )
@@ -28,5 +26,5 @@ def serve():
 
 
 if __name__ == '__main__':
-    logging.basicConfig()
-    serve()
+    logging.basicConfig(level=logging.INFO)
+    asyncio.get_event_loop().run_until_complete(serve())
