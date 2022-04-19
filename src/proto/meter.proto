@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package getmeter;
+
+service ShowMeter{
+  rpc ListMeters(ShowMeterRequest) returns (stream MeterUsage);
+}
+
+message ShowMeterRequest {
+  string request_method = 1;
+}
+
+
+message MeterUsage {
+  string time = 1;
+  float meterusage = 2;
+}
