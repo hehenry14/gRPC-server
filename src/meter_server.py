@@ -1,5 +1,4 @@
 import logging
-import meter_pb2
 import meter_pb2_grpc
 import grpc
 from concurrent import futures
