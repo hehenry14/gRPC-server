@@ -21,8 +21,8 @@ async def serve():
         ShowMeterServicer(), server
     )
     server.add_insecure_port('[::]:50051')
-    server.start()
-    server.wait_for_termination()
+    await server.start()
+    await server.wait_for_termination()
 
 
 if __name__ == '__main__':
