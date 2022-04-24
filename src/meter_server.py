@@ -10,7 +10,7 @@ class ShowMeterServicer(meter_pb2_grpc.ShowMeterServicer):
     def __init__(self):
         self.db = meter_resources.read_route_guide_database()
 
-    def ListMeters(self, request, context):
+    def ListMeters(self, request=None, context=None):
         for meter_usage in self.db:
             yield meter_usage
 
