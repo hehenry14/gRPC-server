@@ -25,15 +25,19 @@ async def main():
     async with grpc.aio.insecure_channel('server:50051') as channel:
         stub = meter_pb2_grpc.ShowMeterStub(channel)
         result = await show_meter(stub)
-    return json.dumps(result)
+    return json.dumps(result, indent=True, sort_keys=True)
 
 
-@app.route("/")
+@app.route('/meter_usages', methods=['GET'])
 def list_meter():
-    loop = asyncio.get_event_loop()
     app.logger.info('getting all the meter usages.')
-    return loop.run_until_complete(main())
+    return asyncio.run(main())
+
+
+@app.route('/')
+def welcome():
+    return 'Welcome to my learning server.'
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
