@@ -16,6 +16,6 @@ docker-compose up
 
 Send the get request to `127.0.0.1:5000/meter_usages` to get the JSON format data.
 
-## Nice to have for the futre
+## Nice to have for the future
 
-1. Pagination for the data stream.
+1. Front end app, loading the json nicely.
