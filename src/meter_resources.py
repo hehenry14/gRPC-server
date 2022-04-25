@@ -10,7 +10,7 @@ def read_route_guide_database():
       route_guide_pb2.Features.
   """
     meter_usage_list = []
-    data_dict = pd.read_csv('data/meterusage.1649407467.csv', header=None, index_col=0, squeeze=True).to_dict()
+    data_dict = pd.read_csv('/app/src/data/meterusage.1649407467.csv', header=None, index_col=0, squeeze=True).to_dict()
 
     for time in data_dict:
         if time != 'time':
