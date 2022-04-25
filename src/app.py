@@ -2,6 +2,8 @@ import asyncio
 import logging
 
 import json
+import time
+
 import grpc
 import meter_pb2_grpc
 
@@ -33,5 +35,7 @@ async def list_meter():
     return await main()
 
 if __name__ == '__main__':
+    # wait for the server to start first
+    time.sleep(5)
     asyncio.run(main())
     app.run()
