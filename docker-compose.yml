@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  server:
+    build: .
+    ports:
+      - "50051:50051"
+    command: python3 /app/src/meter_server.py
+
+  client:
+    build: .
+    ports:
+      - "5000:5000"
+    command: python3 /app/src/app.py
