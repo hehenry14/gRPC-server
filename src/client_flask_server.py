@@ -2,7 +2,6 @@ import asyncio
 import logging
 
 import json
-import time
 
 import grpc
 import meter_pb2
@@ -23,19 +22,18 @@ async def show_meter(stub: meter_pb2_grpc.ShowMeterStub):
 
 
 async def main():
-    async with grpc.aio.insecure_channel('localhost:50051') as channel:
+    async with grpc.aio.insecure_channel('server:50051') as channel:
         stub = meter_pb2_grpc.ShowMeterStub(channel)
         result = await show_meter(stub)
-        return json.dumps(result)
+    return json.dumps(result)
 
 
 @app.route("/")
-async def list_meter():
+def list_meter():
+    loop = asyncio.get_event_loop()
     app.logger.info('getting all the meter usages.')
-    return await main()
+    return loop.run_until_complete(main())
+
 
 if __name__ == '__main__':
-    # wait for the server to start first
-    time.sleep(5)
-    asyncio.run(main())
     app.run()
