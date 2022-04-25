@@ -10,4 +10,4 @@ services:
     build: .
     ports:
       - "5000:5000"
-    command: python3 /app/src/app.py
+    command: python3 /app/src/client_flask_server.py
