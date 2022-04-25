@@ -8,6 +8,8 @@ services:
 
   client:
     build: .
+    depends_on:
+      - server
     ports:
       - "5000:5000"
     command: python3 /app/src/client_flask_server.py
